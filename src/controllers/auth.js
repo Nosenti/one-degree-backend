@@ -57,8 +57,11 @@ export default class Auth {
       });
       const token = jwtToken.createToken(user);
       user.verifyToken = token;
-      user.save();
-      
+      const savedUser = await user.save();
+      return res.status(201).json({
+        message: "Account created",
+        data: savedUser
+      })
     } catch (error) {
       console.log(error)
       return res.status(500).send({
