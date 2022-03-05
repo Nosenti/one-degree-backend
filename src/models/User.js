@@ -20,6 +20,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true,'Please provide your password'],
       minLength: 8
+    },
+    connections: {
+      type: [String]
     }
   }, 
   {
