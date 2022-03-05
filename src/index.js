@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import { Server } from "socket.io";
+import cors from "cors"
 
 
 import router from './routes/index.js';
@@ -24,6 +25,7 @@ connectDB()
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors())
 
 app.use('/api', router)
 

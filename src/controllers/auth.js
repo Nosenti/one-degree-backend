@@ -25,7 +25,7 @@ export default class Auth {
         name,
         email,
         password,
-        passwordConfirm
+        // passwordConfirm
       } = req.body;
 
       const existUser = await User.findOne({ email });
@@ -41,12 +41,12 @@ export default class Auth {
         d:'mm'
       })
       
-      if( passwordConfirm !== password){
-        return res.status(400).send({
-          status: 400,
-          message:"Password and confirm password do not match"
-        })
-      }
+      // if( passwordConfirm !== password){
+      //   return res.status(400).send({
+      //     status: 400,
+      //     message:"Password and confirm password do not match"
+      //   })
+      // }
       const hash = hashPassword(password);
       const user = await User.create({
         name,
