@@ -1,4 +1,4 @@
-import { emitEvent } from './emitEvent';
+import { emitEvent } from './emitEvent.js';
 
 const notify = (connectStatus, type, id, titleMessage, notiMessage) => {
   if (connectStatus === type) {
@@ -7,7 +7,7 @@ const notify = (connectStatus, type, id, titleMessage, notiMessage) => {
       requestId: id,
       title: titleMessage,
       message: notiMessage,
-      link: `/${_id}`,
+      link: `/${id}`,
       status: 'unread'
     };
     emitEvent.emit('notification', notification);
