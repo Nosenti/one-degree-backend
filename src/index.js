@@ -8,6 +8,7 @@ import connectDB from './config/db.js';
 
 import 'dotenv/config.js';
 import { handshake, userConnection } from './libs/chat.js';
+import initEmitter from "./utils/emitEvent.js"
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -33,5 +34,7 @@ app.listen(PORT, () => {
 
 //chat handler
 io.use(handshake).on("connection", userConnection);
+
+initEmitter()
 
 export default app;
