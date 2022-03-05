@@ -8,8 +8,6 @@ export function userValidate(req, res, next) {
     email: Joi.string().min(4).required().email()
       .trim(),
     password: Joi.string().min(6).max(8).required()
-      .trim(),
-    passwordConfirm: Joi.string().min(6).max(8).required()
       .trim()
 
   });
