@@ -30,7 +30,7 @@ export default class User_{
           })
 
           await connection.save()
-          notify(type="new connection", titleMessage='Dear, You have new connection.', connectStatus="SUGGESTION", id=userId, motiMessage="You have new connection suggestion\n You can accept or decline")
+          notify("new connection",'Dear, You have new connection.', "SUGGESTION", userId, "You have new connection suggestion\n You can accept or decline")
           res.status(201).send({
             message: 'connection sent'
           })
@@ -100,14 +100,14 @@ export default class User_{
 
               await requester.save();
               await requestee.save();
-              notify(type="APPROVED", titleMessage='Connection approval.', connectStatus="APPROVED", id=requester.connection.id, motiMessage="Dear, Your connection has been approved\n You can start having conversation")
+              notify("APPROVED", 'Connection approval.', "APPROVED", requester.connection.id, "Dear, Your connection has been approved\n You can start having conversation")
               res.status(201).send({
                 message: 'Approved'
               })
 
             }else if(status === 'declined'){
               request.status = "declined";
-              notify(type="REJECTED", titleMessage='Connection rejected.', connectStatus="REJECTED", id=userId, motiMessage="Sorry🥺, Your connection was rejected")
+              notify("REJECTED", 'Connection rejected.', "REJECTED", userId, "Sorry🥺, Your connection was rejected")
               await request.save();
               res.status(200).send({
                 message: 'declined'
@@ -147,7 +147,7 @@ export default class User_{
               if (approvedSuggestion) {
                 suggestedOne.connections.push(suggestion.suggestedTwo.id);
                 suggestedTwo.connections.push(suggestion.suggestedOne.id);
-                notify(type="APPROVED", titleMessage='Connection approval.', connectStatus="APPROVED", id=suggestion.suggestedTwo.id, motiMessage="Dear, Your connection has been approved\n You can start having conversation")
+                notify("APPROVED", 'Connection approval.', "APPROVED", suggestion.suggestedTwo.id, "Dear, Your connection has been approved\n You can start having conversation")
               }
 
                await suggestedOne.save();
@@ -162,7 +162,7 @@ export default class User_{
              if(suggestion.suggestedTwo.status == 'pending' && status == 'approved'){
               await Suggestion.updateOne({_id: req.params.id},{$set: {'suggestedTwo.status':status}})
 
-              notify(type="APPROVED", titleMessage='Connection approval.', connectStatus="APPROVED", id=suggestion.suggestedOne.id, motiMessage="Dear, Your connection has been approved\n You can start having conversation")
+              notify("APPROVED", 'Connection approval.', "APPROVED", suggestion.suggestedOne.id, "Dear, Your connection has been approved\n You can start having conversation")
 
                res.status(200).send({
                  message: 'Thanks for approving. Wait for the other person to make a decision'
@@ -182,7 +182,7 @@ export default class User_{
               if (approvedSuggestion) {
                 suggestedOne.connections.push(suggestion.suggestedTwo.id);
                 suggestedTwo.connections.push(suggestion.suggestedOne.id);
-                notify(type="APPROVED", titleMessage='Connection approval.', connectStatus="APPROVED", id=suggestion.suggestedOne.id, motiMessage="Dear, Your connection has been approved\n You can start having conversation")
+                notify("APPROVED", 'Connection approval.', "APPROVED", suggestion.suggestedOne.id, "Dear, Your connection has been approved\n You can start having conversation")
               }
               await suggestedOne.save();
               await suggestedTwo.save();
@@ -195,7 +195,7 @@ export default class User_{
             if(suggestion.suggestedOne.status == 'pending' && status == 'approved'){
 
               await Suggestion.updateOne({_id: req.params.id},{$set: {'suggestedOne.status':status}})
-              notify(type="APPROVED", titleMessage='Connection approval.', connectStatus="APPROVED", id=suggestion.suggestedOne.id, motiMessage="Dear, Your connection has been approved\n You can start having conversation")
+              notify("APPROVED", 'Connection approval.', "APPROVED", suggestion.suggestedOne.id, "Dear, Your connection has been approved\n You can start having conversation")
               await suggestion.save();
               res.status(200).send({
                 message: 'Thanks for approving. Wait for the other party to make a decision'

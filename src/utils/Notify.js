@@ -1,6 +1,6 @@
 import { emitEvent } from './emitEvent.js';
 
-const notify = (connectStatus, type, id, titleMessage, notiMessage) => {
+const notify = (type, titleMessage, connectStatus, id, notiMessage) => {
   if (connectStatus === type) {
     const notification = {
       eventType: type,
