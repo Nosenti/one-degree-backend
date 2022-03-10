@@ -29,10 +29,12 @@ export default class User_{
             requestee: connectionId
           })
 
-          await connection.save()
+          const connectionData = await connection.save();
+
           notify("new connection",'Dear, You have new connection.', "SUGGESTION", userId, "You have new connection suggestion\n You can accept or decline")
           res.status(201).send({
-            message: 'connection sent'
+            message: 'connection sent',
+            data: connectionData
           })
         } catch (error) {
           console.log('error: ', error)

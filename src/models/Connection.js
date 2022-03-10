@@ -5,7 +5,7 @@ const connectionSchema = mongoose.Schema(
     requester: {
       type: String,
     },
-    suggestee: {
+    requestee: {
       type: String,
     }
   }, 
